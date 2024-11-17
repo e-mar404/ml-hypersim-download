@@ -24,3 +24,5 @@ Running top script will default to creating two directories one for downloads (t
 # setting download and image directories to be in external storage
 /bin/sh run.sh --download_dir /Volumes/Drive/fai/download --image_dir /Volumes/Drive/fai/images
 ```
+
+Running `all.sh` will get all the files and geometries for the selected frames. For this script you only need a download_dir
