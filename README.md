@@ -15,14 +15,31 @@ pip install -r requirements.txt
 To run script do:
 
 ``` bash
-/bin/sh run.sh
+# defaults download first 10 frames from the first scene/url
+
+./run.sh
 ```
 
-Running top script will default to creating two directories one for downloads (this dir will be deleted at the end of the script) and one for images (where all the images will go to). If you want to set a specific directory path for download and image dirs you can do this:
+Running the script above will default to creating two directories one for downloads (this dir will be deleted at the end of the script) and one for images (where all the images will go to).
+
+## Extra args
+
+--download_dir /file/path 
+    (temp directory to download everything)
+
+--images_dir /file/path 
+    (directory where all the frames for all the scenes will be dumped in)
+
+--size # 
+    (number of scenes/urls to use, defaults to 1)
+
+--frames #### 
+    (needs to be 4 digits with leading 0's i.e. 0010 for 10 frames, this will download that many frames from each scene selected)
+
+### Example
 
 ``` bash
-# setting download and image directories to be in external storage
-/bin/sh run.sh --download_dir /Volumes/Drive/fai/download --image_dir /Volumes/Drive/fai/images
-```
+# download the first 20 frames from the first 2 scenes/url into an external drive
 
-Running `all.sh` will get all the files and geometries for the selected frames. For this script you only need a download_dir
+./run.sh --download_dir /Volumes/Drive/fai/download --image_dir /Volumes/Drive/fai/images --size 2 --frames 0020
+```

@@ -1,17 +1,27 @@
-#!/bin/sh
+#!/bin/bash
 
 download_dir="./downloads"
 image_dir="./images"
+size=1
+frames=0009
 
 while [ $# -gt 0 ]; do
   case "$1" in
     --download_dir)
       download_dir="$2"
-      shift 2
+      shift 2 
       ;;
     --image_dir)
       image_dir="$2"
-      shift 2
+      shift 2 
+      ;;
+    --size)
+      size="$2"
+      shift 2 
+      ;;
+    --frames)
+      frames=$(( $2 - 1 )) 
+      shift 2 
       ;;
     *)
       echo "Unknown option: $1"
@@ -22,11 +32,9 @@ done
 
 rm -rf "$image_dir"
 
-./download.py --contains scene_cam_00_final_preview --contains frame.0000.color.jpg --silent -d "$download_dir"
-./download.py --contains scene_cam_00_final_preview --contains frame.0001.color.jpg --silent -d "$download_dir"
-./download.py --contains scene_cam_00_final_preview --contains frame.0002.color.jpg --silent -d "$download_dir"
-./download.py --contains scene_cam_00_final_preview --contains frame.0003.color.jpg --silent -d "$download_dir"
-./download.py --contains scene_cam_00_final_preview --contains frame.0004.color.jpg --silent -d "$download_dir"
+for i in {0000..$frames}; do
+  ./download.py --size $size --contains scene_cam_00_final_preview --contains frame.${i}.color.jpg --silent -d "$download_dir"
+done
 
 ./move.py --source "$download_dir" --destination "$image_dir"
 
